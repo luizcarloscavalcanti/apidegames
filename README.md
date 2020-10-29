@@ -1,6 +1,6 @@
-#API DE GAMES#
+<b>APIDEGAMES</b>
 
-Simples api Rest com Node.js!
+Simple API Rest with Node.js
 
 <b>Javascript</b>
 + Sequelize 
