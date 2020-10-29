@@ -2,7 +2,7 @@
 
 Simples api Rest com Node.js!
 
-#Javascript# 
+<b>Javascript</b>
 + Sequelize 
 + express
 + MySql

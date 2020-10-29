@@ -15,17 +15,17 @@ connection
     console.log(err);
   });
 
+connection.sync();
+
 app.get("/games", (req, res) => {
   res.statusCode = 200;
-  connection.sync().then(() => {
-    Game.findAll({
-      order: [
-        ["id", "DESC"]
-      ]
-    }).then(games => {
-      res.json(games);
-    })
-  });
+  Game.findAll({
+    order: [
+      ["id", "DESC"]
+    ]
+  }).then(games => {
+    res.json(games);
+  })
 });
 
 app.get("/game/:id", (req, res) => {
