@@ -3,6 +3,9 @@ const app = express();
 const bodyParser = require("body-parser");
 const connection = require("./database/database");
 const gameController = require("./games/gameController");
+const cors = require("cors");
+
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
