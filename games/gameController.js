@@ -10,7 +10,7 @@ router.get("/games", auth, (req, res) => {
       ["id", "DESC"]
     ]
   }).then(games => {
-    res.json({ user: req.loggedUser, games: games });
+    res.json(games);
   })
 });
 
