@@ -1,19 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const Game = require("./Game");
+const auth = require("../users/userAuth");
 
-router.get("/games", (req, res) => {
+router.get("/games", auth, (req, res) => {
   res.statusCode = 200;
   Game.findAll({
     order: [
       ["id", "DESC"]
     ]
   }).then(games => {
-    res.json(games);
+    res.json({ user: req.loggedUser, games: games });
   })
 });
 
-router.get("/game/:id", (req, res) => {
+router.get("/game/:id", auth, (req, res) => {
   res.statusCode = 200;
 
   if (isNaN(req.params.id)) {
@@ -32,7 +33,7 @@ router.get("/game/:id", (req, res) => {
   }
 });
 
-router.post("/game", (req, res) => {
+router.post("/game", auth, (req, res) => {
   var { title, price, year } = req.body;
 
   Game.create({
@@ -44,7 +45,7 @@ router.post("/game", (req, res) => {
   });
 });
 
-router.delete("/game/:id", (req, res) => {
+router.delete("/game/:id", auth, (req, res) => {
 
   if (isNaN(req.params.id)) {
     res.sendStatus(400);
@@ -66,7 +67,7 @@ router.delete("/game/:id", (req, res) => {
   }
 });
 
-router.put("/game/:id", (req, res) => {
+router.put("/game/:id", auth, (req, res) => {
   if (isNaN(req.params.id)) {
     res.sendStatus(400);
   } else {
