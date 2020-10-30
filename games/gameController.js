@@ -4,13 +4,32 @@ const Game = require("./Game");
 const auth = require("../users/userAuth");
 
 router.get("/games", auth, (req, res) => {
+
+  var hateoas = [
+    {
+      href: "http://localhost:3000/game/0",
+      method: "DELETE",
+      rel: "delete_game"
+    },
+    {
+      href: "http://localhost:3000/games",
+      method: "GET",
+      rel: "get_game"
+    },
+    {
+      href: "http://localhost:3000/auth",
+      method: "POST",
+      rel: "login"
+    }
+  ]
+
   res.statusCode = 200;
   Game.findAll({
     order: [
       ["id", "DESC"]
     ]
   }).then(games => {
-    res.json(games);
+    res.json({ games: games, _links: hateoas });
   })
 });
 
